@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option go_package = "github.com/antongoncharik/crypto-knight-protos/protos/common;";
+
+message EmptyRequest {
+}
+
+message EmptyResponse {
+}
+
+service CommonService {
+  rpc Enable (EmptyRequest) returns (EmptyResponse) {};
+  rpc Disable (EmptyRequest) returns (EmptyResponse) {};
+}
