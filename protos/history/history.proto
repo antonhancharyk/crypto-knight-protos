@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package history;
+
+option go_package = "github.com/antongoncharik/crypto-knight-protos/protos/history;";
+
+message InputKline {
+  int64 id = 1;
+  string symbol = 2;
+  int64 open_time = 3;
+  double open_price = 4;
+  double high_price = 5;
+  double low_price = 6;
+  double close_price = 7;
+  double volume = 8;
+  int64 close_time = 9;
+  double quote_asset_volume = 10;
+  int64 num_trades = 11;
+  double taker_buy_base_asset_volume = 12;
+  double taker_buy_quote_asset_volume = 13;
+}
+
+message ProcessHistoryRequest {
+  repeated InputKline klines = 1;
+}
+
+message ProcessHistoryResponse {
+  string symbol = 1;
+  double amount_positive_percentages = 2;
+  double amount_negative_percentages = 3;
+  string quantity_stop_markets = 4;
+}
+
+service HistoryService {
+  rpc ProcessHistory(ProcessHistoryRequest) returns (ProcessHistoryResponse);
+}
