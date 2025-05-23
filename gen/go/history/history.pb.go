@@ -210,7 +210,7 @@ type ProcessHistoryResponse struct {
 	Symbol                    string                 `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
 	AmountPositivePercentages float64                `protobuf:"fixed64,2,opt,name=amount_positive_percentages,json=amountPositivePercentages,proto3" json:"amount_positive_percentages,omitempty"`
 	AmountNegativePercentages float64                `protobuf:"fixed64,3,opt,name=amount_negative_percentages,json=amountNegativePercentages,proto3" json:"amount_negative_percentages,omitempty"`
-	QuantityStopMarkets       string                 `protobuf:"bytes,4,opt,name=quantity_stop_markets,json=quantityStopMarkets,proto3" json:"quantity_stop_markets,omitempty"`
+	QuantityStopMarkets       float64                `protobuf:"fixed64,4,opt,name=quantity_stop_markets,json=quantityStopMarkets,proto3" json:"quantity_stop_markets,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -266,11 +266,11 @@ func (x *ProcessHistoryResponse) GetAmountNegativePercentages() float64 {
 	return 0
 }
 
-func (x *ProcessHistoryResponse) GetQuantityStopMarkets() string {
+func (x *ProcessHistoryResponse) GetQuantityStopMarkets() float64 {
 	if x != nil {
 		return x.QuantityStopMarkets
 	}
-	return ""
+	return 0
 }
 
 var File_history_proto protoreflect.FileDescriptor
@@ -305,7 +305,7 @@ const file_history_proto_rawDesc = "" +
 	"\x06symbol\x18\x01 \x01(\tR\x06symbol\x12>\n" +
 	"\x1bamount_positive_percentages\x18\x02 \x01(\x01R\x19amountPositivePercentages\x12>\n" +
 	"\x1bamount_negative_percentages\x18\x03 \x01(\x01R\x19amountNegativePercentages\x122\n" +
-	"\x15quantity_stop_markets\x18\x04 \x01(\tR\x13quantityStopMarkets2c\n" +
+	"\x15quantity_stop_markets\x18\x04 \x01(\x01R\x13quantityStopMarkets2c\n" +
 	"\x0eHistoryService\x12Q\n" +
 	"\x0eProcessHistory\x12\x1e.history.ProcessHistoryRequest\x1a\x1f.history.ProcessHistoryResponseB@Z>github.com/antongoncharik/crypto-knight-protos/protos/history;b\x06proto3"
 

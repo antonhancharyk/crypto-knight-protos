@@ -28,7 +28,7 @@ message ProcessHistoryResponse {
   string symbol = 1;
   double amount_positive_percentages = 2;
   double amount_negative_percentages = 3;
-  string quantity_stop_markets = 4;
+  double quantity_stop_markets = 4;
 }
 
 service HistoryService {
