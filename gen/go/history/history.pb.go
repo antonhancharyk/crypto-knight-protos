@@ -206,13 +206,16 @@ func (x *ProcessHistoryRequest) GetKlines() []*InputKline {
 }
 
 type ProcessHistoryResponse struct {
-	state                     protoimpl.MessageState `protogen:"open.v1"`
-	Symbol                    string                 `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	AmountPositivePercentages float64                `protobuf:"fixed64,2,opt,name=amount_positive_percentages,json=amountPositivePercentages,proto3" json:"amount_positive_percentages,omitempty"`
-	AmountNegativePercentages float64                `protobuf:"fixed64,3,opt,name=amount_negative_percentages,json=amountNegativePercentages,proto3" json:"amount_negative_percentages,omitempty"`
-	QuantityStopMarkets       float64                `protobuf:"fixed64,4,opt,name=quantity_stop_markets,json=quantityStopMarkets,proto3" json:"quantity_stop_markets,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"open.v1"`
+	Symbol                       string                 `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	SumPositivePercentageChanges float64                `protobuf:"fixed64,2,opt,name=sum_positive_percentage_changes,json=sumPositivePercentageChanges,proto3" json:"sum_positive_percentage_changes,omitempty"`
+	CountPositiveChanges         int32                  `protobuf:"varint,3,opt,name=count_positive_changes,json=countPositiveChanges,proto3" json:"count_positive_changes,omitempty"`
+	SumNegativePercentageChanges float64                `protobuf:"fixed64,4,opt,name=sum_negative_percentage_changes,json=sumNegativePercentageChanges,proto3" json:"sum_negative_percentage_changes,omitempty"`
+	CountNegativeChanges         int32                  `protobuf:"varint,5,opt,name=count_negative_changes,json=countNegativeChanges,proto3" json:"count_negative_changes,omitempty"`
+	CountStopMarketOrders        int32                  `protobuf:"varint,6,opt,name=count_stop_market_orders,json=countStopMarketOrders,proto3" json:"count_stop_market_orders,omitempty"`
+	CountTransactions            int32                  `protobuf:"varint,7,opt,name=count_transactions,json=countTransactions,proto3" json:"count_transactions,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *ProcessHistoryResponse) Reset() {
@@ -252,23 +255,44 @@ func (x *ProcessHistoryResponse) GetSymbol() string {
 	return ""
 }
 
-func (x *ProcessHistoryResponse) GetAmountPositivePercentages() float64 {
+func (x *ProcessHistoryResponse) GetSumPositivePercentageChanges() float64 {
 	if x != nil {
-		return x.AmountPositivePercentages
+		return x.SumPositivePercentageChanges
 	}
 	return 0
 }
 
-func (x *ProcessHistoryResponse) GetAmountNegativePercentages() float64 {
+func (x *ProcessHistoryResponse) GetCountPositiveChanges() int32 {
 	if x != nil {
-		return x.AmountNegativePercentages
+		return x.CountPositiveChanges
 	}
 	return 0
 }
 
-func (x *ProcessHistoryResponse) GetQuantityStopMarkets() float64 {
+func (x *ProcessHistoryResponse) GetSumNegativePercentageChanges() float64 {
 	if x != nil {
-		return x.QuantityStopMarkets
+		return x.SumNegativePercentageChanges
+	}
+	return 0
+}
+
+func (x *ProcessHistoryResponse) GetCountNegativeChanges() int32 {
+	if x != nil {
+		return x.CountNegativeChanges
+	}
+	return 0
+}
+
+func (x *ProcessHistoryResponse) GetCountStopMarketOrders() int32 {
+	if x != nil {
+		return x.CountStopMarketOrders
+	}
+	return 0
+}
+
+func (x *ProcessHistoryResponse) GetCountTransactions() int32 {
+	if x != nil {
+		return x.CountTransactions
 	}
 	return 0
 }
@@ -300,12 +324,15 @@ const file_history_proto_rawDesc = "" +
 	"\x1btaker_buy_base_asset_volume\x18\f \x01(\x01R\x17takerBuyBaseAssetVolume\x12>\n" +
 	"\x1ctaker_buy_quote_asset_volume\x18\r \x01(\x01R\x18takerBuyQuoteAssetVolume\"D\n" +
 	"\x15ProcessHistoryRequest\x12+\n" +
-	"\x06klines\x18\x01 \x03(\v2\x13.history.InputKlineR\x06klines\"\xe4\x01\n" +
+	"\x06klines\x18\x01 \x03(\v2\x13.history.InputKlineR\x06klines\"\x92\x03\n" +
 	"\x16ProcessHistoryResponse\x12\x16\n" +
-	"\x06symbol\x18\x01 \x01(\tR\x06symbol\x12>\n" +
-	"\x1bamount_positive_percentages\x18\x02 \x01(\x01R\x19amountPositivePercentages\x12>\n" +
-	"\x1bamount_negative_percentages\x18\x03 \x01(\x01R\x19amountNegativePercentages\x122\n" +
-	"\x15quantity_stop_markets\x18\x04 \x01(\x01R\x13quantityStopMarkets2c\n" +
+	"\x06symbol\x18\x01 \x01(\tR\x06symbol\x12E\n" +
+	"\x1fsum_positive_percentage_changes\x18\x02 \x01(\x01R\x1csumPositivePercentageChanges\x124\n" +
+	"\x16count_positive_changes\x18\x03 \x01(\x05R\x14countPositiveChanges\x12E\n" +
+	"\x1fsum_negative_percentage_changes\x18\x04 \x01(\x01R\x1csumNegativePercentageChanges\x124\n" +
+	"\x16count_negative_changes\x18\x05 \x01(\x05R\x14countNegativeChanges\x127\n" +
+	"\x18count_stop_market_orders\x18\x06 \x01(\x05R\x15countStopMarketOrders\x12-\n" +
+	"\x12count_transactions\x18\a \x01(\x05R\x11countTransactions2c\n" +
 	"\x0eHistoryService\x12Q\n" +
 	"\x0eProcessHistory\x12\x1e.history.ProcessHistoryRequest\x1a\x1f.history.ProcessHistoryResponseB@Z>github.com/antongoncharik/crypto-knight-protos/protos/history;b\x06proto3"
 
