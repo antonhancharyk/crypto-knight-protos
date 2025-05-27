@@ -26,9 +26,12 @@ message ProcessHistoryRequest {
 
 message ProcessHistoryResponse {
   string symbol = 1;
-  double amount_positive_percentages = 2;
-  double amount_negative_percentages = 3;
-  double quantity_stop_markets = 4;
+  double sum_positive_percentage_changes = 2;
+  double count_positive_changes = 3;
+  double sum_negative_percentage_changes = 4;
+  double count_negative_changes = 5;
+  double count_stop_market_orders = 6;
+  double count_transactions = 7;
 }
 
 service HistoryService {
