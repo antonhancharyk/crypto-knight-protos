@@ -24,6 +24,10 @@ message ProcessHistoryRequest {
   repeated InputKline klines = 1;
 }
 
+message ConditionsInnerMap {
+  map<string, int32> v = 1;
+}
+
 message ProcessHistoryResponse {
   string symbol = 1;
   double sum_positive_percentage_changes = 2;
@@ -32,6 +36,7 @@ message ProcessHistoryResponse {
   int32 count_negative_changes = 5;
   int32 count_stop_market_orders = 6;
   int32 count_transactions = 7;
+  map<string, ConditionsInnerMap> conditions = 8;
 }
 
 service HistoryService {
