@@ -38,6 +38,7 @@ message ProcessHistoryResponse {
   int32 count_zero_stop_market_orders = 7;
   int32 count_transactions = 8;
   map<string, ConditionsInnerMap> conditions = 9;
+  double sum_incomplited_stop_percentage_changes = 10;
 }
 
 service HistoryService {
