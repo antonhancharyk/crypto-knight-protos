@@ -257,10 +257,10 @@ type ProcessHistoryResponse struct {
 	SumNegativePercentageChanges        float64                        `protobuf:"fixed64,4,opt,name=sum_negative_percentage_changes,json=sumNegativePercentageChanges,proto3" json:"sum_negative_percentage_changes,omitempty"`
 	CountNegativeChanges                int32                          `protobuf:"varint,5,opt,name=count_negative_changes,json=countNegativeChanges,proto3" json:"count_negative_changes,omitempty"`
 	CountStopMarketOrders               int32                          `protobuf:"varint,6,opt,name=count_stop_market_orders,json=countStopMarketOrders,proto3" json:"count_stop_market_orders,omitempty"`
-	CountZeroStopMarketOrders           int32                          `protobuf:"varint,7,opt,name=count_zero_stop_market_orders,json=countZeroStopMarketOrders,proto3" json:"count_zero_stop_market_orders,omitempty"`
-	CountTransactions                   int32                          `protobuf:"varint,8,opt,name=count_transactions,json=countTransactions,proto3" json:"count_transactions,omitempty"`
-	Conditions                          map[string]*ConditionsInnerMap `protobuf:"bytes,9,rep,name=conditions,proto3" json:"conditions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	SumIncomplitedStopPercentageChanges float64                        `protobuf:"fixed64,10,opt,name=sum_incomplited_stop_percentage_changes,json=sumIncomplitedStopPercentageChanges,proto3" json:"sum_incomplited_stop_percentage_changes,omitempty"`
+	CountTransactions                   int32                          `protobuf:"varint,7,opt,name=count_transactions,json=countTransactions,proto3" json:"count_transactions,omitempty"`
+	Conditions                          map[string]*ConditionsInnerMap `protobuf:"bytes,8,rep,name=conditions,proto3" json:"conditions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	SumIncomplitedStopPercentageChanges float64                        `protobuf:"fixed64,9,opt,name=sum_incomplited_stop_percentage_changes,json=sumIncomplitedStopPercentageChanges,proto3" json:"sum_incomplited_stop_percentage_changes,omitempty"`
+	CountIncomplitedStop                int32                          `protobuf:"varint,10,opt,name=count_incomplited_stop,json=countIncomplitedStop,proto3" json:"count_incomplited_stop,omitempty"`
 	unknownFields                       protoimpl.UnknownFields
 	sizeCache                           protoimpl.SizeCache
 }
@@ -337,13 +337,6 @@ func (x *ProcessHistoryResponse) GetCountStopMarketOrders() int32 {
 	return 0
 }
 
-func (x *ProcessHistoryResponse) GetCountZeroStopMarketOrders() int32 {
-	if x != nil {
-		return x.CountZeroStopMarketOrders
-	}
-	return 0
-}
-
 func (x *ProcessHistoryResponse) GetCountTransactions() int32 {
 	if x != nil {
 		return x.CountTransactions
@@ -361,6 +354,13 @@ func (x *ProcessHistoryResponse) GetConditions() map[string]*ConditionsInnerMap 
 func (x *ProcessHistoryResponse) GetSumIncomplitedStopPercentageChanges() float64 {
 	if x != nil {
 		return x.SumIncomplitedStopPercentageChanges
+	}
+	return 0
+}
+
+func (x *ProcessHistoryResponse) GetCountIncomplitedStop() int32 {
+	if x != nil {
+		return x.CountIncomplitedStop
 	}
 	return 0
 }
@@ -397,21 +397,21 @@ const file_history_proto_rawDesc = "" +
 	"\x01v\x18\x01 \x03(\v2\".history.ConditionsInnerMap.VEntryR\x01v\x1a4\n" +
 	"\x06VEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"\xd7\x05\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"\xcb\x05\n" +
 	"\x16ProcessHistoryResponse\x12\x16\n" +
 	"\x06symbol\x18\x01 \x01(\tR\x06symbol\x12E\n" +
 	"\x1fsum_positive_percentage_changes\x18\x02 \x01(\x01R\x1csumPositivePercentageChanges\x124\n" +
 	"\x16count_positive_changes\x18\x03 \x01(\x05R\x14countPositiveChanges\x12E\n" +
 	"\x1fsum_negative_percentage_changes\x18\x04 \x01(\x01R\x1csumNegativePercentageChanges\x124\n" +
 	"\x16count_negative_changes\x18\x05 \x01(\x05R\x14countNegativeChanges\x127\n" +
-	"\x18count_stop_market_orders\x18\x06 \x01(\x05R\x15countStopMarketOrders\x12@\n" +
-	"\x1dcount_zero_stop_market_orders\x18\a \x01(\x05R\x19countZeroStopMarketOrders\x12-\n" +
-	"\x12count_transactions\x18\b \x01(\x05R\x11countTransactions\x12O\n" +
+	"\x18count_stop_market_orders\x18\x06 \x01(\x05R\x15countStopMarketOrders\x12-\n" +
+	"\x12count_transactions\x18\a \x01(\x05R\x11countTransactions\x12O\n" +
 	"\n" +
-	"conditions\x18\t \x03(\v2/.history.ProcessHistoryResponse.ConditionsEntryR\n" +
+	"conditions\x18\b \x03(\v2/.history.ProcessHistoryResponse.ConditionsEntryR\n" +
 	"conditions\x12T\n" +
-	"'sum_incomplited_stop_percentage_changes\x18\n" +
-	" \x01(\x01R#sumIncomplitedStopPercentageChanges\x1aZ\n" +
+	"'sum_incomplited_stop_percentage_changes\x18\t \x01(\x01R#sumIncomplitedStopPercentageChanges\x124\n" +
+	"\x16count_incomplited_stop\x18\n" +
+	" \x01(\x05R\x14countIncomplitedStop\x1aZ\n" +
 	"\x0fConditionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x121\n" +
 	"\x05value\x18\x02 \x01(\v2\x1b.history.ConditionsInnerMapR\x05value:\x028\x012c\n" +
