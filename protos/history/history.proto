@@ -18,14 +18,11 @@ message InputKline {
   int64 num_trades = 11;
   double taker_buy_base_asset_volume = 12;
   double taker_buy_quote_asset_volume = 13;
+  string interval = 14;
 }
 
 message ProcessHistoryRequest {
   repeated InputKline klines = 1;
-}
-
-message ConditionsInnerMap {
-  map<string, int32> v = 1;
 }
 
 message ProcessHistoryResponse {
@@ -35,10 +32,9 @@ message ProcessHistoryResponse {
   double sum_negative_percentage_changes = 4;
   int32 count_negative_changes = 5;
   int32 count_stop_market_orders = 6;
-  int32 count_transactions = 7;
-  map<string, ConditionsInnerMap> conditions = 8;
-  double sum_incomplited_stop_percentage_changes = 9;
-  int32 count_incomplited_stop = 10;
+  double sum_incomplited_stop_percentage_changes = 7;
+  int32 count_incomplited_stop = 8;
+  int32 count_transactions = 9;
 }
 
 service HistoryService {
