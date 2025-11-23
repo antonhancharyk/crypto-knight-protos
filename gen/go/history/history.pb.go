@@ -36,6 +36,7 @@ type InputKline struct {
 	NumTrades                int64                  `protobuf:"varint,11,opt,name=num_trades,json=numTrades,proto3" json:"num_trades,omitempty"`
 	TakerBuyBaseAssetVolume  float64                `protobuf:"fixed64,12,opt,name=taker_buy_base_asset_volume,json=takerBuyBaseAssetVolume,proto3" json:"taker_buy_base_asset_volume,omitempty"`
 	TakerBuyQuoteAssetVolume float64                `protobuf:"fixed64,13,opt,name=taker_buy_quote_asset_volume,json=takerBuyQuoteAssetVolume,proto3" json:"taker_buy_quote_asset_volume,omitempty"`
+	Interval                 string                 `protobuf:"bytes,14,opt,name=interval,proto3" json:"interval,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -161,6 +162,13 @@ func (x *InputKline) GetTakerBuyQuoteAssetVolume() float64 {
 	return 0
 }
 
+func (x *InputKline) GetInterval() string {
+	if x != nil {
+		return x.Interval
+	}
+	return ""
+}
+
 type ProcessHistoryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Klines        []*InputKline          `protobuf:"bytes,1,rep,name=klines,proto3" json:"klines,omitempty"`
@@ -205,69 +213,24 @@ func (x *ProcessHistoryRequest) GetKlines() []*InputKline {
 	return nil
 }
 
-type ConditionsInnerMap struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	V             map[string]int32       `protobuf:"bytes,1,rep,name=v,proto3" json:"v,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ConditionsInnerMap) Reset() {
-	*x = ConditionsInnerMap{}
-	mi := &file_history_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ConditionsInnerMap) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ConditionsInnerMap) ProtoMessage() {}
-
-func (x *ConditionsInnerMap) ProtoReflect() protoreflect.Message {
-	mi := &file_history_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ConditionsInnerMap.ProtoReflect.Descriptor instead.
-func (*ConditionsInnerMap) Descriptor() ([]byte, []int) {
-	return file_history_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *ConditionsInnerMap) GetV() map[string]int32 {
-	if x != nil {
-		return x.V
-	}
-	return nil
-}
-
 type ProcessHistoryResponse struct {
-	state                               protoimpl.MessageState         `protogen:"open.v1"`
-	Symbol                              string                         `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	SumPositivePercentageChanges        float64                        `protobuf:"fixed64,2,opt,name=sum_positive_percentage_changes,json=sumPositivePercentageChanges,proto3" json:"sum_positive_percentage_changes,omitempty"`
-	CountPositiveChanges                int32                          `protobuf:"varint,3,opt,name=count_positive_changes,json=countPositiveChanges,proto3" json:"count_positive_changes,omitempty"`
-	SumNegativePercentageChanges        float64                        `protobuf:"fixed64,4,opt,name=sum_negative_percentage_changes,json=sumNegativePercentageChanges,proto3" json:"sum_negative_percentage_changes,omitempty"`
-	CountNegativeChanges                int32                          `protobuf:"varint,5,opt,name=count_negative_changes,json=countNegativeChanges,proto3" json:"count_negative_changes,omitempty"`
-	CountStopMarketOrders               int32                          `protobuf:"varint,6,opt,name=count_stop_market_orders,json=countStopMarketOrders,proto3" json:"count_stop_market_orders,omitempty"`
-	CountTransactions                   int32                          `protobuf:"varint,7,opt,name=count_transactions,json=countTransactions,proto3" json:"count_transactions,omitempty"`
-	Conditions                          map[string]*ConditionsInnerMap `protobuf:"bytes,8,rep,name=conditions,proto3" json:"conditions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	SumIncomplitedStopPercentageChanges float64                        `protobuf:"fixed64,9,opt,name=sum_incomplited_stop_percentage_changes,json=sumIncomplitedStopPercentageChanges,proto3" json:"sum_incomplited_stop_percentage_changes,omitempty"`
-	CountIncomplitedStop                int32                          `protobuf:"varint,10,opt,name=count_incomplited_stop,json=countIncomplitedStop,proto3" json:"count_incomplited_stop,omitempty"`
+	state                               protoimpl.MessageState `protogen:"open.v1"`
+	Symbol                              string                 `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	SumPositivePercentageChanges        float64                `protobuf:"fixed64,2,opt,name=sum_positive_percentage_changes,json=sumPositivePercentageChanges,proto3" json:"sum_positive_percentage_changes,omitempty"`
+	CountPositiveChanges                int32                  `protobuf:"varint,3,opt,name=count_positive_changes,json=countPositiveChanges,proto3" json:"count_positive_changes,omitempty"`
+	SumNegativePercentageChanges        float64                `protobuf:"fixed64,4,opt,name=sum_negative_percentage_changes,json=sumNegativePercentageChanges,proto3" json:"sum_negative_percentage_changes,omitempty"`
+	CountNegativeChanges                int32                  `protobuf:"varint,5,opt,name=count_negative_changes,json=countNegativeChanges,proto3" json:"count_negative_changes,omitempty"`
+	CountStopMarketOrders               int32                  `protobuf:"varint,6,opt,name=count_stop_market_orders,json=countStopMarketOrders,proto3" json:"count_stop_market_orders,omitempty"`
+	SumIncomplitedStopPercentageChanges float64                `protobuf:"fixed64,7,opt,name=sum_incomplited_stop_percentage_changes,json=sumIncomplitedStopPercentageChanges,proto3" json:"sum_incomplited_stop_percentage_changes,omitempty"`
+	CountIncomplitedStop                int32                  `protobuf:"varint,8,opt,name=count_incomplited_stop,json=countIncomplitedStop,proto3" json:"count_incomplited_stop,omitempty"`
+	CountTransactions                   int32                  `protobuf:"varint,9,opt,name=count_transactions,json=countTransactions,proto3" json:"count_transactions,omitempty"`
 	unknownFields                       protoimpl.UnknownFields
 	sizeCache                           protoimpl.SizeCache
 }
 
 func (x *ProcessHistoryResponse) Reset() {
 	*x = ProcessHistoryResponse{}
-	mi := &file_history_proto_msgTypes[3]
+	mi := &file_history_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -279,7 +242,7 @@ func (x *ProcessHistoryResponse) String() string {
 func (*ProcessHistoryResponse) ProtoMessage() {}
 
 func (x *ProcessHistoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_history_proto_msgTypes[3]
+	mi := &file_history_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -292,7 +255,7 @@ func (x *ProcessHistoryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProcessHistoryResponse.ProtoReflect.Descriptor instead.
 func (*ProcessHistoryResponse) Descriptor() ([]byte, []int) {
-	return file_history_proto_rawDescGZIP(), []int{3}
+	return file_history_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ProcessHistoryResponse) GetSymbol() string {
@@ -337,20 +300,6 @@ func (x *ProcessHistoryResponse) GetCountStopMarketOrders() int32 {
 	return 0
 }
 
-func (x *ProcessHistoryResponse) GetCountTransactions() int32 {
-	if x != nil {
-		return x.CountTransactions
-	}
-	return 0
-}
-
-func (x *ProcessHistoryResponse) GetConditions() map[string]*ConditionsInnerMap {
-	if x != nil {
-		return x.Conditions
-	}
-	return nil
-}
-
 func (x *ProcessHistoryResponse) GetSumIncomplitedStopPercentageChanges() float64 {
 	if x != nil {
 		return x.SumIncomplitedStopPercentageChanges
@@ -365,11 +314,18 @@ func (x *ProcessHistoryResponse) GetCountIncomplitedStop() int32 {
 	return 0
 }
 
+func (x *ProcessHistoryResponse) GetCountTransactions() int32 {
+	if x != nil {
+		return x.CountTransactions
+	}
+	return 0
+}
+
 var File_history_proto protoreflect.FileDescriptor
 
 const file_history_proto_rawDesc = "" +
 	"\n" +
-	"\rhistory.proto\x12\ahistory\"\xcf\x03\n" +
+	"\rhistory.proto\x12\ahistory\"\xeb\x03\n" +
 	"\n" +
 	"InputKline\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x16\n" +
@@ -390,31 +346,20 @@ const file_history_proto_rawDesc = "" +
 	"\n" +
 	"num_trades\x18\v \x01(\x03R\tnumTrades\x12<\n" +
 	"\x1btaker_buy_base_asset_volume\x18\f \x01(\x01R\x17takerBuyBaseAssetVolume\x12>\n" +
-	"\x1ctaker_buy_quote_asset_volume\x18\r \x01(\x01R\x18takerBuyQuoteAssetVolume\"D\n" +
+	"\x1ctaker_buy_quote_asset_volume\x18\r \x01(\x01R\x18takerBuyQuoteAssetVolume\x12\x1a\n" +
+	"\binterval\x18\x0e \x01(\tR\binterval\"D\n" +
 	"\x15ProcessHistoryRequest\x12+\n" +
-	"\x06klines\x18\x01 \x03(\v2\x13.history.InputKlineR\x06klines\"|\n" +
-	"\x12ConditionsInnerMap\x120\n" +
-	"\x01v\x18\x01 \x03(\v2\".history.ConditionsInnerMap.VEntryR\x01v\x1a4\n" +
-	"\x06VEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"\xcb\x05\n" +
+	"\x06klines\x18\x01 \x03(\v2\x13.history.InputKlineR\x06klines\"\x9e\x04\n" +
 	"\x16ProcessHistoryResponse\x12\x16\n" +
 	"\x06symbol\x18\x01 \x01(\tR\x06symbol\x12E\n" +
 	"\x1fsum_positive_percentage_changes\x18\x02 \x01(\x01R\x1csumPositivePercentageChanges\x124\n" +
 	"\x16count_positive_changes\x18\x03 \x01(\x05R\x14countPositiveChanges\x12E\n" +
 	"\x1fsum_negative_percentage_changes\x18\x04 \x01(\x01R\x1csumNegativePercentageChanges\x124\n" +
 	"\x16count_negative_changes\x18\x05 \x01(\x05R\x14countNegativeChanges\x127\n" +
-	"\x18count_stop_market_orders\x18\x06 \x01(\x05R\x15countStopMarketOrders\x12-\n" +
-	"\x12count_transactions\x18\a \x01(\x05R\x11countTransactions\x12O\n" +
-	"\n" +
-	"conditions\x18\b \x03(\v2/.history.ProcessHistoryResponse.ConditionsEntryR\n" +
-	"conditions\x12T\n" +
-	"'sum_incomplited_stop_percentage_changes\x18\t \x01(\x01R#sumIncomplitedStopPercentageChanges\x124\n" +
-	"\x16count_incomplited_stop\x18\n" +
-	" \x01(\x05R\x14countIncomplitedStop\x1aZ\n" +
-	"\x0fConditionsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x121\n" +
-	"\x05value\x18\x02 \x01(\v2\x1b.history.ConditionsInnerMapR\x05value:\x028\x012c\n" +
+	"\x18count_stop_market_orders\x18\x06 \x01(\x05R\x15countStopMarketOrders\x12T\n" +
+	"'sum_incomplited_stop_percentage_changes\x18\a \x01(\x01R#sumIncomplitedStopPercentageChanges\x124\n" +
+	"\x16count_incomplited_stop\x18\b \x01(\x05R\x14countIncomplitedStop\x12-\n" +
+	"\x12count_transactions\x18\t \x01(\x05R\x11countTransactions2c\n" +
 	"\x0eHistoryService\x12Q\n" +
 	"\x0eProcessHistory\x12\x1e.history.ProcessHistoryRequest\x1a\x1f.history.ProcessHistoryResponseB@Z>github.com/antongoncharik/crypto-knight-protos/protos/history;b\x06proto3"
 
@@ -430,27 +375,21 @@ func file_history_proto_rawDescGZIP() []byte {
 	return file_history_proto_rawDescData
 }
 
-var file_history_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_history_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_history_proto_goTypes = []any{
 	(*InputKline)(nil),             // 0: history.InputKline
 	(*ProcessHistoryRequest)(nil),  // 1: history.ProcessHistoryRequest
-	(*ConditionsInnerMap)(nil),     // 2: history.ConditionsInnerMap
-	(*ProcessHistoryResponse)(nil), // 3: history.ProcessHistoryResponse
-	nil,                            // 4: history.ConditionsInnerMap.VEntry
-	nil,                            // 5: history.ProcessHistoryResponse.ConditionsEntry
+	(*ProcessHistoryResponse)(nil), // 2: history.ProcessHistoryResponse
 }
 var file_history_proto_depIdxs = []int32{
 	0, // 0: history.ProcessHistoryRequest.klines:type_name -> history.InputKline
-	4, // 1: history.ConditionsInnerMap.v:type_name -> history.ConditionsInnerMap.VEntry
-	5, // 2: history.ProcessHistoryResponse.conditions:type_name -> history.ProcessHistoryResponse.ConditionsEntry
-	2, // 3: history.ProcessHistoryResponse.ConditionsEntry.value:type_name -> history.ConditionsInnerMap
-	1, // 4: history.HistoryService.ProcessHistory:input_type -> history.ProcessHistoryRequest
-	3, // 5: history.HistoryService.ProcessHistory:output_type -> history.ProcessHistoryResponse
-	5, // [5:6] is the sub-list for method output_type
-	4, // [4:5] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	1, // 1: history.HistoryService.ProcessHistory:input_type -> history.ProcessHistoryRequest
+	2, // 2: history.HistoryService.ProcessHistory:output_type -> history.ProcessHistoryResponse
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_history_proto_init() }
@@ -464,7 +403,7 @@ func file_history_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_history_proto_rawDesc), len(file_history_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
