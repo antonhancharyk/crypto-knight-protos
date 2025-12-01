@@ -19,16 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CommonService_Enable_FullMethodName  = "/CommonService/Enable"
-	CommonService_Disable_FullMethodName = "/CommonService/Disable"
+	CommonService_EnableTrading_FullMethodName  = "/CommonService/EnableTrading"
+	CommonService_DisableTrading_FullMethodName = "/CommonService/DisableTrading"
 )
 
 // CommonServiceClient is the client API for CommonService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CommonServiceClient interface {
-	Enable(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
-	Disable(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	EnableTrading(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	DisableTrading(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
 }
 
 type commonServiceClient struct {
@@ -39,20 +39,20 @@ func NewCommonServiceClient(cc grpc.ClientConnInterface) CommonServiceClient {
 	return &commonServiceClient{cc}
 }
 
-func (c *commonServiceClient) Enable(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+func (c *commonServiceClient) EnableTrading(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EmptyResponse)
-	err := c.cc.Invoke(ctx, CommonService_Enable_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, CommonService_EnableTrading_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *commonServiceClient) Disable(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+func (c *commonServiceClient) DisableTrading(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EmptyResponse)
-	err := c.cc.Invoke(ctx, CommonService_Disable_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, CommonService_DisableTrading_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -63,8 +63,8 @@ func (c *commonServiceClient) Disable(ctx context.Context, in *EmptyRequest, opt
 // All implementations must embed UnimplementedCommonServiceServer
 // for forward compatibility.
 type CommonServiceServer interface {
-	Enable(context.Context, *EmptyRequest) (*EmptyResponse, error)
-	Disable(context.Context, *EmptyRequest) (*EmptyResponse, error)
+	EnableTrading(context.Context, *EmptyRequest) (*EmptyResponse, error)
+	DisableTrading(context.Context, *EmptyRequest) (*EmptyResponse, error)
 	mustEmbedUnimplementedCommonServiceServer()
 }
 
@@ -75,11 +75,11 @@ type CommonServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedCommonServiceServer struct{}
 
-func (UnimplementedCommonServiceServer) Enable(context.Context, *EmptyRequest) (*EmptyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Enable not implemented")
+func (UnimplementedCommonServiceServer) EnableTrading(context.Context, *EmptyRequest) (*EmptyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnableTrading not implemented")
 }
-func (UnimplementedCommonServiceServer) Disable(context.Context, *EmptyRequest) (*EmptyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Disable not implemented")
+func (UnimplementedCommonServiceServer) DisableTrading(context.Context, *EmptyRequest) (*EmptyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DisableTrading not implemented")
 }
 func (UnimplementedCommonServiceServer) mustEmbedUnimplementedCommonServiceServer() {}
 func (UnimplementedCommonServiceServer) testEmbeddedByValue()                       {}
@@ -102,38 +102,38 @@ func RegisterCommonServiceServer(s grpc.ServiceRegistrar, srv CommonServiceServe
 	s.RegisterService(&CommonService_ServiceDesc, srv)
 }
 
-func _CommonService_Enable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CommonService_EnableTrading_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmptyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CommonServiceServer).Enable(ctx, in)
+		return srv.(CommonServiceServer).EnableTrading(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CommonService_Enable_FullMethodName,
+		FullMethod: CommonService_EnableTrading_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommonServiceServer).Enable(ctx, req.(*EmptyRequest))
+		return srv.(CommonServiceServer).EnableTrading(ctx, req.(*EmptyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CommonService_Disable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CommonService_DisableTrading_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmptyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CommonServiceServer).Disable(ctx, in)
+		return srv.(CommonServiceServer).DisableTrading(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CommonService_Disable_FullMethodName,
+		FullMethod: CommonService_DisableTrading_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommonServiceServer).Disable(ctx, req.(*EmptyRequest))
+		return srv.(CommonServiceServer).DisableTrading(ctx, req.(*EmptyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -146,12 +146,12 @@ var CommonService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*CommonServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Enable",
-			Handler:    _CommonService_Enable_Handler,
+			MethodName: "EnableTrading",
+			Handler:    _CommonService_EnableTrading_Handler,
 		},
 		{
-			MethodName: "Disable",
-			Handler:    _CommonService_Disable_Handler,
+			MethodName: "DisableTrading",
+			Handler:    _CommonService_DisableTrading_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

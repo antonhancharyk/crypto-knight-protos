@@ -99,10 +99,10 @@ const file_common_proto_rawDesc = "" +
 	"\n" +
 	"\fcommon.proto\"\x0e\n" +
 	"\fEmptyRequest\"\x0f\n" +
-	"\rEmptyResponse2f\n" +
-	"\rCommonService\x12)\n" +
-	"\x06Enable\x12\r.EmptyRequest\x1a\x0e.EmptyResponse\"\x00\x12*\n" +
-	"\aDisable\x12\r.EmptyRequest\x1a\x0e.EmptyResponse\"\x00B?Z=github.com/antongoncharik/crypto-knight-protos/protos/common;b\x06proto3"
+	"\rEmptyResponse2t\n" +
+	"\rCommonService\x120\n" +
+	"\rEnableTrading\x12\r.EmptyRequest\x1a\x0e.EmptyResponse\"\x00\x121\n" +
+	"\x0eDisableTrading\x12\r.EmptyRequest\x1a\x0e.EmptyResponse\"\x00B?Z=github.com/antongoncharik/crypto-knight-protos/protos/common;b\x06proto3"
 
 var (
 	file_common_proto_rawDescOnce sync.Once
@@ -122,10 +122,10 @@ var file_common_proto_goTypes = []any{
 	(*EmptyResponse)(nil), // 1: EmptyResponse
 }
 var file_common_proto_depIdxs = []int32{
-	0, // 0: CommonService.Enable:input_type -> EmptyRequest
-	0, // 1: CommonService.Disable:input_type -> EmptyRequest
-	1, // 2: CommonService.Enable:output_type -> EmptyResponse
-	1, // 3: CommonService.Disable:output_type -> EmptyResponse
+	0, // 0: CommonService.EnableTrading:input_type -> EmptyRequest
+	0, // 1: CommonService.DisableTrading:input_type -> EmptyRequest
+	1, // 2: CommonService.EnableTrading:output_type -> EmptyResponse
+	1, // 3: CommonService.DisableTrading:output_type -> EmptyResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

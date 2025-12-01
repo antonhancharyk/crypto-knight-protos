@@ -9,6 +9,6 @@ message EmptyResponse {
 }
 
 service CommonService {
-  rpc Enable (EmptyRequest) returns (EmptyResponse) {};
-  rpc Disable (EmptyRequest) returns (EmptyResponse) {};
+  rpc EnableTrading (EmptyRequest) returns (EmptyResponse) {};
+  rpc DisableTrading (EmptyRequest) returns (EmptyResponse) {};
 }
