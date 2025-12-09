@@ -172,6 +172,7 @@ func (x *InputKline) GetInterval() string {
 type ProcessHistoryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Klines        []*InputKline          `protobuf:"bytes,1,rep,name=klines,proto3" json:"klines,omitempty"`
+	Klines1H      []*InputKline          `protobuf:"bytes,2,rep,name=klines1h,proto3" json:"klines1h,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -209,6 +210,13 @@ func (*ProcessHistoryRequest) Descriptor() ([]byte, []int) {
 func (x *ProcessHistoryRequest) GetKlines() []*InputKline {
 	if x != nil {
 		return x.Klines
+	}
+	return nil
+}
+
+func (x *ProcessHistoryRequest) GetKlines1H() []*InputKline {
+	if x != nil {
+		return x.Klines1H
 	}
 	return nil
 }
@@ -347,9 +355,10 @@ const file_history_proto_rawDesc = "" +
 	"num_trades\x18\v \x01(\x03R\tnumTrades\x12<\n" +
 	"\x1btaker_buy_base_asset_volume\x18\f \x01(\x01R\x17takerBuyBaseAssetVolume\x12>\n" +
 	"\x1ctaker_buy_quote_asset_volume\x18\r \x01(\x01R\x18takerBuyQuoteAssetVolume\x12\x1a\n" +
-	"\binterval\x18\x0e \x01(\tR\binterval\"D\n" +
+	"\binterval\x18\x0e \x01(\tR\binterval\"u\n" +
 	"\x15ProcessHistoryRequest\x12+\n" +
-	"\x06klines\x18\x01 \x03(\v2\x13.history.InputKlineR\x06klines\"\x9e\x04\n" +
+	"\x06klines\x18\x01 \x03(\v2\x13.history.InputKlineR\x06klines\x12/\n" +
+	"\bklines1h\x18\x02 \x03(\v2\x13.history.InputKlineR\bklines1h\"\x9e\x04\n" +
 	"\x16ProcessHistoryResponse\x12\x16\n" +
 	"\x06symbol\x18\x01 \x01(\tR\x06symbol\x12E\n" +
 	"\x1fsum_positive_percentage_changes\x18\x02 \x01(\x01R\x1csumPositivePercentageChanges\x124\n" +
@@ -383,13 +392,14 @@ var file_history_proto_goTypes = []any{
 }
 var file_history_proto_depIdxs = []int32{
 	0, // 0: history.ProcessHistoryRequest.klines:type_name -> history.InputKline
-	1, // 1: history.HistoryService.ProcessHistory:input_type -> history.ProcessHistoryRequest
-	2, // 2: history.HistoryService.ProcessHistory:output_type -> history.ProcessHistoryResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0, // 1: history.ProcessHistoryRequest.klines1h:type_name -> history.InputKline
+	1, // 2: history.HistoryService.ProcessHistory:input_type -> history.ProcessHistoryRequest
+	2, // 3: history.HistoryService.ProcessHistory:output_type -> history.ProcessHistoryResponse
+	3, // [3:4] is the sub-list for method output_type
+	2, // [2:3] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_history_proto_init() }

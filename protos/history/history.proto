@@ -23,6 +23,7 @@ message InputKline {
 
 message ProcessHistoryRequest {
   repeated InputKline klines = 1;
+  repeated InputKline klines1h = 2;
 }
 
 message ProcessHistoryResponse {
